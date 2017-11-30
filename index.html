@@ -1,243 +1,251 @@
-<html>
-<head>
-	<title>Mecha Name Generator</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-	<script type="text/javascript">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Mecha Name Generator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style>
+      html, body {
+            width: 100%;
+            height: 100%;
+            background: white;
+            margin:0;
+            padding:0;
+          }
+      #col1{
+      }
+      #col2{
+        height: auto;
+      }
+      #mechaImg
+      {
+        margin-top: 10%;
+      }
+      p{
+        color: white;
+      }
+      h1{
+        color: white;
+        text-align: center;
+        font-size: 70px;
+      }
+      h2{
+        color: white;
+      }
+      h3{
+        color: white;
+      }
+    </style>
 
-	var color = new Array();
-	color[0] = "#E57373";
-	color[1] = "#F06292";
-	color[2] = "#BA68C8";
-	color[3] = "#9575CD";
-	color[4] = "#7986CB";
-	color[5] = "#64B5F6";
-	color[6] = "#4FC3F7";
-	color[7] = "#4DD0E1";
-	color[8] = "#4DB6AC";
-	color[9] = "#81C784";
-	color[10] = "#AED581";
-	color[11] = "#DCE775";
-	color[12] = "#FFF176";
-	color[13] = "#FFD54F";
-	color[14] = "#FFB74D";
-	color[15] = "#FF8A65";
-	color[16] = "#A1887F";
-	color[17] = "#90A4AE";
+  </head>
+  <body onload="changeMecha()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col" id="col1">
+          <div class="row">
+            <img id="mechaImg" class="rounded mx-auto d-block" style="height: 80%;">
+          </div>
+          <div class="row">
+            <div class="col">
+              <p id="mName" style="text-align:center;"></p>
+              <p style="text-align:center;"><i id="mShow"></i></p>
+            </div>
+          </div>
+        </div>
 
-	var mecha = new Array();
+        <div class="col" id="col2">
+          <div class="row">
+              <div class="col-12" style="margin-top: 5%;">
+                <h1>Mecha Name Generator</h1>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col" style="margin-top: 5%;">
+              <button type="button" class="btn btn btn-secondary btn-lg btn-block" onclick="generateMecha()">Generate</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" style="margin-top: 5%;">
+              <h2>Additional options</h2>
+            </div>
+          </div>  
+          <div class="row">
+            <div class="col-4" style="margin-top: 2%; margin-left: 5%;">
+              <h3>Number of titles</h3>
+                <div class="form-group">
+                    <select class="form-control" id="sel1">
+                      <option>0</option>
+                      <option>1</option>
+                      <option>2</option>
+                  </select>
+                </div>
+            </div>
+          </div>  
+          <div class="row">
+            <div class="col-5" style="margin-top: 2%; margin-left: 5%;">
+              <button type="button" class="btn btn btn-secondary" onclick="changeMecha()">Change Background</button>
+            </div>
+          </div>  
+          <div class="row">
+            <div class="col-5" style="margin-top: 2%;">
+              <h2>Your mecha name is...</h2>
+            </div>
+          </div>  
+          <div class="row">
+            <div class="col" style="margin-top: 2%;">
+              <h1 id="mechaNameJP"></h1>
+            </div>
+          </div>  
+          <div class="row">
+            <div class="col" style="margin-top: 2%;">
+              <h3 id="mechaNameEN" style="text-align:center;"></h3>
+            </div>
+          </div>    
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script>
 
-	mecha[0] = new Image();
-	mecha[0].src = 'assets/img/01.png';
-	mecha[0].mechaName = "RX-78-2 Gundam";
-	mecha[0].mechaShow = "Mobile Suit Gundam, 1979"
+    var color = new Array();
+    color[0] = "#E57373";
+    color[1] = "#F06292";
+    color[2] = "#BA68C8";
+    color[3] = "#9575CD";
+    color[4] = "#7986CB";
+    color[5] = "#64B5F6";
+    color[6] = "#4FC3F7";
+    color[7] = "#4DD0E1";
+    color[8] = "#4DB6AC";
+    color[9] = "#81C784";
+    color[10] = "#AED581";
+    color[11] = "#DCE775";
+    color[12] = "#FFF176";
+    color[13] = "#FFD54F";
+    color[14] = "#FFB74D";
+    color[15] = "#FF8A65";
+    color[16] = "#A1887F";
+    color[17] = "#90A4AE";
 
-	mecha[1] = new Image();
-	mecha[1].src = 'assets/img/02.png';
-	mecha[1].mechaName = "The Ideon";
-	mecha[1].mechaShow = "Space Runaway Ideon, 1980";
+    var mecha = new Array();
 
-	mecha[2] = new Image();
-	mecha[2].src = 'assets/img/03.png';
-	mecha[2].mechaName = "Z-01 Lancelot";
-	mecha[2].mechaShow = "Code Geass, 2006";
+    mecha[0] = new Image();
+    mecha[0].src = 'assets/img/01.png';
+    mecha[0].mechaName = "RX-78-2 Gundam";
+    mecha[0].mechaShow = "Mobile Suit Gundam, 1979"
 
-	mecha[3] = new Image();
-	mecha[3].src = 'assets/img/04.png';
-	mecha[3].mechaName = "XD-01 Dragonar-1";
-	mecha[3].mechaShow = "Metal Armor Dragonar, 1987";
+    mecha[1] = new Image();
+    mecha[1].src = 'assets/img/02.png';
+    mecha[1].mechaName = "The Ideon";
+    mecha[1].mechaShow = "Space Runaway Ideon, 1980";
 
-	mecha[4] = new Image();
-	mecha[4].src = 'assets/img/05.png';
-	mecha[4].mechaName = "VF-1S Valkyrie";
-	mecha[4].mechaShow = "Super Dimension Fortress Macross, 1982";
+    mecha[2] = new Image();
+    mecha[2].src = 'assets/img/03.png';
+    mecha[2].mechaName = "Z-01 Lancelot";
+    mecha[2].mechaShow = "Code Geass, 2006";
 
-	mecha[5] = new Image();
-	mecha[5].src = 'assets/img/06.png';
-	mecha[5].mechaName = "Nirvash TypeZERO";
-	mecha[5].mechaShow = "Symphonic Psalms Eureka Seven, 2005";
+    mecha[3] = new Image();
+    mecha[3].src = 'assets/img/04.png';
+    mecha[3].mechaName = "XD-01 Dragonar-1";
+    mecha[3].mechaShow = "Metal Armor Dragonar, 1987";
 
-	mecha[6] = new Image();
-	mecha[6].src = 'assets/img/07.png';
-	mecha[6].mechaName = "Gurren Lagann";
-	mecha[6].mechaShow = "Tengen Toppa Gurren Lagann, 2007";
+    mecha[4] = new Image();
+    mecha[4].src = 'assets/img/05.png';
+    mecha[4].mechaName = "VF-1S Valkyrie";
+    mecha[4].mechaShow = "Super Dimension Fortress Macross, 1982";
 
-	mecha[7] = new Image();
-	mecha[7].src = 'assets/img/08.png';
-	mecha[7].mechaName = "Escaflowne";
-	mecha[7].mechaShow = "The Vision of Escaflowne, 1994";
+    mecha[5] = new Image();
+    mecha[5].src = 'assets/img/06.png';
+    mecha[5].mechaName = "Nirvash TypeZERO";
+    mecha[5].mechaShow = "Symphonic Psalms Eureka Seven, 2005";
 
-	mecha[8] = new Image();
-	mecha[8].src = 'assets/img/09.png';
-	mecha[8].mechaName = "Mazinger Z";
-	mecha[8].mechaShow = "Mazinger Z, 1972";
+    mecha[6] = new Image();
+    mecha[6].src = 'assets/img/07.png';
+    mecha[6].mechaName = "Gurren Lagann";
+    mecha[6].mechaShow = "Tengen Toppa Gurren Lagann, 2007";
 
-	mecha[9] = new Image();
-	mecha[9].src = 'assets/img/10.png';
-	mecha[9].mechaName = "ARX-7 Arbalest";
-	mecha[9].mechaShow = "Full Metal Panic!, 2002";
+    mecha[7] = new Image();
+    mecha[7].src = 'assets/img/08.png';
+    mecha[7].mechaName = "Escaflowne";
+    mecha[7].mechaShow = "The Vision of Escaflowne, 1994";
 
-	mecha[10] = new Image();
-	mecha[10].src = 'assets/img/11.png';
-	mecha[10].mechaName = "SYSTEM ∀-99 ∀ Gundam";
-	mecha[10].mechaShow = "Turn A Gundam, 1999";
+    mecha[8] = new Image();
+    mecha[8].src = 'assets/img/09.png';
+    mecha[8].mechaName = "Mazinger Z";
+    mecha[8].mechaShow = "Mazinger Z, 1972";
 
-	mecha[11] = new Image();
-	mecha[11].src = 'assets/img/12.png';
-	mecha[11].mechaName = "GaoGaiGar";
-	mecha[11].mechaShow = "The King of Braves GaoGaiGar, 1997";
+    mecha[9] = new Image();
+    mecha[9].src = 'assets/img/10.png';
+    mecha[9].mechaName = "ARX-7 Arbalest";
+    mecha[9].mechaShow = "Full Metal Panic!, 2002";
 
-	mecha[12] = new Image();
-	mecha[12].src = 'assets/img/13.png';
-	mecha[12].mechaName = "FAM-RV-S1 Vifam";
-	mecha[12].mechaShow = "Ginga Hyōryū Vifam, 1983";
+    mecha[10] = new Image();
+    mecha[10].src = 'assets/img/11.png';
+    mecha[10].mechaName = "SYSTEM ∀-99 ∀ Gundam";
+    mecha[10].mechaShow = "Turn A Gundam, 1999";
 
-	mecha[13] = new Image();
-	mecha[13].src = 'assets/img/14.png';
-	mecha[13].mechaName = "Evangelion Unit-01";
-	mecha[13].mechaShow = "Neon Genesis Evangelion, 1995";
+    mecha[11] = new Image();
+    mecha[11].src = 'assets/img/12.png';
+    mecha[11].mechaName = "GaoGaiGar";
+    mecha[11].mechaShow = "The King of Braves GaoGaiGar, 1997";
 
-	mecha[14] = new Image();
-	mecha[14].src = 'assets/img/15.png';
-	mecha[14].mechaName = "Dunbine";
-	mecha[14].mechaShow = "Aura Battler Dunbine, 1983";
+    mecha[12] = new Image();
+    mecha[12].src = 'assets/img/13.png';
+    mecha[12].mechaName = "FAM-RV-S1 Vifam";
+    mecha[12].mechaShow = "Ginga Hyōryū Vifam, 1983";
 
-	mecha[15] = new Image();
-	mecha[15].src = 'assets/img/16.png';
-	mecha[15].mechaName = "Dougram";
-	mecha[15].mechaShow = "Fang of the Sun Dougram, 1981";
+    mecha[13] = new Image();
+    mecha[13].src = 'assets/img/14.png';
+    mecha[13].mechaName = "Evangelion Unit-01";
+    mecha[13].mechaShow = "Neon Genesis Evangelion, 1995";
 
-	mecha[16] = new Image();
-	mecha[16].src = 'assets/img/17.png';
-	mecha[16].mechaName = "AV-98 Ingram";
-	mecha[16].mechaShow = "Mobile Police Patlabor, 1988";
+    mecha[14] = new Image();
+    mecha[14].src = 'assets/img/15.png';
+    mecha[14].mechaName = "Dunbine";
+    mecha[14].mechaShow = "Aura Battler Dunbine, 1983";
 
-	mecha[17] = new Image();
-	mecha[17].src = 'assets/img/18.png';
-	mecha[17].mechaName = "ATM-09-ST Scopedog";
-	mecha[17].mechaShow = "Armored Trooper VOTOMS, 1983";
-	
+    mecha[15] = new Image();
+    mecha[15].src = 'assets/img/16.png';
+    mecha[15].mechaName = "Dougram";
+    mecha[15].mechaShow = "Fang of the Sun Dougram, 1981";
 
-	function changeMecha()
-	{
-	  var randomColor = Math.floor(Math.random() * color.length);
-	  document.body.style.backgroundColor = color[randomColor];
-	  document.body.style.transition = "all 2s";
+    mecha[16] = new Image();
+    mecha[16].src = 'assets/img/17.png';
+    mecha[16].mechaName = "AV-98 Ingram";
+    mecha[16].mechaShow = "Mobile Police Patlabor, 1988";
 
-	  var randomMecha = Math.floor(Math.random() * mecha.length);
-	  document.getElementById('mechaImg').src = mecha[randomMecha].src;
+    mecha[17] = new Image();
+    mecha[17].src = 'assets/img/18.png';
+    mecha[17].mechaName = "ATM-09-ST Scopedog";
+    mecha[17].mechaShow = "Armored Trooper VOTOMS, 1983";
+    
 
-	  document.getElementById('mName').innerHTML = mecha[randomMecha].mechaName;
-	  document.getElementById('mShow').innerHTML = "from " + mecha[randomMecha].mechaShow;
+    function changeMecha()
+    {
+      var randomColor = Math.floor(Math.random() * color.length);
+      document.body.style.backgroundColor = color[randomColor];
+      document.body.style.transition = "all 2s";
 
-	  document.getElementById('col2').style.backgroundColor = "black";
-	  document.getElementById('col2').style.transition = "2s";
+      var randomMecha = Math.floor(Math.random() * mecha.length);
+      document.getElementById('mechaImg').src = mecha[randomMecha].src;
+      document.getElementById('mechaImg').style.height = "800px";
 
-	}
-	function generateMecha()
-	{
-		document.getElementById('mechaNameJP').innerHTML = "プレースホルダ";
-		document.getElementById('mechaNameEN').innerHTML = "(Placeholder)";
+      document.getElementById('mName').innerHTML = mecha[randomMecha].mechaName;
+      document.getElementById('mShow').innerHTML = "from " + mecha[randomMecha].mechaShow;
 
-	}
-	</script>
+      document.getElementById('col2').style.backgroundColor = "black";
+      document.getElementById('col2').style.transition = "2s";
 
-	<style>
-		body{
-			font-family: 
-		}
-		#col1{
-		}
-		#col2{
-			height: 100%;
-		}
-		#mechaImg{
-			margin-top: 10%;
-		}
-		p{
-			color: white;
-		}
-		h1{
-			color: white;
-			text-align: center;
-			font-size: 70px;
-		}
-		h2{
-			color: white;
-		}
-		h3{
-			color: white;
-		}
-	</style>
+    }
+    function generateMecha()
+    {
+      document.getElementById('mechaNameJP').innerHTML = "プレースホルダ";
+      document.getElementById('mechaNameEN').innerHTML = "(Placeholder)";
 
-</head>
-<body onload="changeMecha()">
-<div class="container-fluid">
-	<div class="row">
-		<div class="col" id="col1">
-			<div class="row">
-				<img id="mechaImg" class="rounded mx-auto d-block" style="height: 80%;">
-			</div>
-			<div class="row">
-				<div class="col">
-					<p id="mName" style="text-align:center;"></p>
-					<p style="text-align:center;"><i id="mShow"></i></p>
-				</div>
-			</div>
-		</div>
-
-		<div class="col" id="col2">
-			<div class="row">
-					<div class="col-12" style="margin-top: 5%;">
-						<h1>Mecha Name Generator</h1>
-					</div>
-			</div>
-			<div class="row">
-				<div class="col" style="margin-top: 5%;">
-					<button type="button" class="btn btn btn-secondary btn-lg btn-block" onclick="generateMecha()">Generate</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12" style="margin-top: 5%;">
-					<h2>Additional options</h2>
-				</div>
-			</div>	
-			<div class="row">
-				<div class="col-4" style="margin-top: 2%; margin-left: 5%;">
-					<h3>Number of titles</h3>
-						<div class="form-group">
-				  			<select class="form-control" id="sel1">
-				    			<option>0</option>
-				    			<option>1</option>
-				    			<option>2</option>
-				 			</select>
-						</div>
-				</div>
-			</div>	
-			<div class="row">
-				<div class="col-5" style="margin-top: 2%; margin-left: 5%;">
-					<button type="button" class="btn btn btn-secondary" onclick="changeMecha()">Change Background</button>
-				</div>
-			</div>	
-			<div class="row">
-				<div class="col-5" style="margin-top: 2%;">
-					<h2>Your mecha name is...</h2>
-				</div>
-			</div>	
-			<div class="row">
-				<div class="col" style="margin-top: 2%;">
-					<h1 id="mechaNameJP"></h1>
-				</div>
-			</div>	
-			<div class="row">
-				<div class="col" style="margin-top: 2%;">
-					<h3 id="mechaNameEN" style="text-align:center;"></h3>
-				</div>
-			</div>		
-		</div>
-	</div>
-</div>
-</body>
+    }
+    </script>
+  </body>
 </html>
